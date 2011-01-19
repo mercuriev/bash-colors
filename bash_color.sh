@@ -42,6 +42,32 @@ function clr_escape
     echo $1
 }
 
+function clr_reset           { clr_escape "$1" $CLR_RESET;           }
+function clr_reset_underline { clr_escape "$1" $CLR_RESET_UNDERLINE; }
+function clr_reset_reverse   { clr_escape "$1" $CLR_RESET_REVERSE;   }
+function clr_default         { clr_escape "$1" $CLR_DEFAULT;         }
+function clr_defaultb        { clr_esacpe "$1" $CLR_DEFAULTB;        }
+function clr_bold            { clr_escape "$1" $CLR_BOLD;            }
+function clr_bright          { clr_escape "$1" $CLR_BRIGHT;          }
+function clr_underscore      { clr_escape "$1" $CLR_UNDERSCORE;      }
+function clr_reverse         { clr_escape "$1" $CLR_REVERSE;         }
+function clr_black           { clr_escape "$1" $CLR_BLANK;           }
+function clr_red             { clr_escape "$1" $CLR_RED;             }
+function clr_green           { clr_escape "$1" $CLR_GREEN;           }
+function clr_brown           { clr_escape "$1" $CLR_BROWN;           }
+function clr_blue            { clr_escape "$1" $CLR_BLUE;            }
+function clr_magenta         { clr_escape "$1" $CLR_MAGENTA;         }
+function clr_cyan            { clr_escape "$1" $CLR_CYAN;            }
+function clr_white           { clr_escape "$1" $CLR_WHITE;           }
+function clr_blackb          { clr_escape "$1" $CLR_BLACKB;          }
+function clr_redb            { clr_escape "$1" $CLR_REDB;            }
+function clr_greenb          { clr_escape "$1" $CLR_GREENB;          }
+function clr_brownb          { clr_escape "$1" $CLR_BROWNB;          }
+function clr_blueb           { clr_escape "$1" $CLR_BLUEB;           }
+function clr_magentab        { clr_escape "$1" $CLR_MAGENTAB;        }
+function clr_cyanb           { clr_escape "$1" $CLR_CYANB;           }
+function clr_whiteb          { clr_escape "$1" $CLR_WHITEB;          }
+
 # Outputs colors table
 function clr_dump
 {
