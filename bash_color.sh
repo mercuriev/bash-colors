@@ -1,8 +1,10 @@
 #!/bin/bash
+#
+# Library for terminal text coloring.
 
 COLOR_ESC="\033["
 
-# All these varibles has a function with the same, but lowercased, name.
+# All these varibles has a function with the same name, but in lower case.
 #
 COLOR_RESET=0             # reset all attributes to their defaults
 COLOR_RESET_UNDERLINE=24  # underline off
@@ -33,7 +35,12 @@ COLOR_MAGENTAB=45         # set magenta background
 COLOR_CYANB=46            # set cyan background
 COLOR_WHITEB=47           # set white background
 
-
+# General function to wrap string with escape seqence(s).
+# Ex: console_escape foobar $COLOR_RED $COLOR_BOLD
+function clr_escape
+{
+    echo $1
+}
 
 # Outputs colors table
 function color_dump
@@ -81,3 +88,4 @@ function color_dump
     47       color_whiteb         $COLOR_WHITEB
 '
 }
+
