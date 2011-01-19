@@ -39,7 +39,16 @@ CLR_WHITEB=47           # set white background
 # Ex: console_escape foobar $CLR_RED $CLR_BOLD
 function clr_escape
 {
-    echo $1
+    local result="$1"
+    until [ -z "$2" ]; do
+	if ! [ $2 -ge 0 -a $2 -le 47 ] 2>/dev/null; then
+	    echo "clr_escape: argument \"$2\" is out of range" >&2 && return 1
+	fi
+        result="${CLR_ESC}${2}m${result}${CLR_ESC}${CLR_RESET}m"
+	shift || break
+    done
+
+    echo -e "$result"
 }
 
 function clr_reset           { clr_escape "$1" $CLR_RESET;           }
@@ -71,7 +80,7 @@ function clr_whiteb          { clr_escape "$1" $CLR_WHITEB;          }
 # Outputs colors table
 function clr_dump
 {
-    local text='gYw'
+    local T='gYw'
 
     echo -e "\n                 40m     41m     42m     43m     44m     45m     46m     47m";
 
@@ -87,9 +96,10 @@ function clr_dump
         echo;
     done
 
-    #clr_bold "    Code   Function           Variable"
-    echo '
-    0        clr_reset          $CLR_RESET
+    echo
+    clr_bold "    Code     Function           Variable"
+    echo \
+'    0        clr_reset          $CLR_RESET
     1        clr_bold           $CLR_BOLD
     2        clr_bright         $CLR_BRIGHT
     4        clr_underscore     $CLR_UNDERSCORE
