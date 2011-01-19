@@ -8,30 +8,30 @@ Usage:
 
   # This defines variables and functions in your scope.
   #
-  # $COLOR_*      varibles contains escape codes for graphics. Think of it like meaningful names for numbers.
-  # $COLOR_ESC    is a special variable which contains escape byte (\033) plus [ character.
+  # $CLR_*      varibles contains escape codes for graphics. Think of it like meaningful names for numbers.
+  # $CLR_ESC    is a special variable which contains escape byte (\033) plus [ character.
   # 
-  # color_escape  function allows to build custom combinations.
+  # clr_escape  function allows to build custom combinations.
   #               It takes a string and unlimited amount of escape codes.
   #               Those will be applied to string in order, then result will be echoed.
-  # color_*       is shortcut functions to format and output text. See color_dump for list.
-  # color_dump    outputs nice table displaying available colors.
-  # color_reset   does 'echo -e "\033[0m"' which clears all previously defined formatting.
+  # clr_*       is shortcut functions to format and output text. See clr_dump for list.
+  # clr_dump    outputs nice table displaying available colors.
+  # clr_reset   does 'echo -e "\033[0m"' which clears all previously defined formatting.
   # 
   # See examples below.
 
   # Echoes "foobar" using red foreground.
-  color_red "foobar"
+  clr_red "foobar"
 
   # green background
-  color_greenb "foobar"
+  clr_greenb "foobar"
 
   # cyan bold
-  color_bold "$(color_cyan foobar)"
+  clr_bold "$(clr_cyan foobar)"
   # or
-  color_escape foobar $COLOR_BOLD $COLOR_CYAN
+  clr_escape foobar $CLR_BOLD $CLR_CYAN
   # or
-  color_escape foobar 1 36
+  clr_escape foobar 1 36
 
 See also console_codes(4).
 
