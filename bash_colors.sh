@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-# Library for terminal text coloring.
+# Constants and functions for terminal colors.
+# Author: Max Tsepkov <max@garygolden.me>
 
 CLR_ESC="\033["
 
