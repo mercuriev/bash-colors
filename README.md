@@ -1,10 +1,10 @@
 Bash colors
 ===========
 
-The library defines verbal constants for ANSII color codes.
+The library defines verbal constants for ANSII color codes.  
 Now you can use words to tell bash what color you want to use for output.
 
-Also, it defines functions to quickly output colored text.
+Also, it defines functions to quickly output colored text.  
 As well as the function to display nice table of all colors.
 
 
