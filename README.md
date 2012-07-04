@@ -1,51 +1,15 @@
-Set of bash functions to output colored content.
+Bash colors
+===========
 
-Installation
-============
+The library defines verbal constants for ANSII color codes.
+Now you can use words to tell bash what color you want to use for output.
 
-0. Download latest source  
-```
-$ curl https://raw.github.com/garygolden/bash_colors/master/bash_colors.sh > ~/.bash_colors
-```
+Also, it defines functions to quickly output colored text.
+As well as the function to display nice table of all colors.
 
-0. Now you can include the file (or add it to .bashrc)  
-```
-$ source ~/.bash_colors
-```
-
-Usage
-=====
-
-The library defines variables and functions which can be used in various ways.  
-
-Variables
----------
-
-**$CLR_\***  
-Set of varibles contains numeric escape codes. Variables are named after english color names.  
-See **clr_dump** for list.
-
-**$CLR_ESC**  
-is a special variable for escape code (\033) followed by [ character.
-
-Functions
----------
-
-**clr_dump**  
-Output table of available colors, functions and variables.
-
-**clr_\*** _string_  
-Output colored _string_. Functions are named after english color names.  
-See **clr_dump** for list.
-
-**clr_escape** _string_ _$CLR_ ...  
-escape _string_ with given colors. Later colors overwrites previous.
-
-**clr_reset**  
-Reset formatting. Useful for custom usage of $CLR_* variable series.
 
 Examples
-========
+--------
 
 Print "foobar" with red foreground.  
 ```
@@ -72,8 +36,52 @@ or any other code
 clr_escape foobar 1 36
 ```
 
+
+Quick start
+------------
+
+1. Download source  
+```
+$ curl https://raw.github.com/garygolden/bash_colors/master/bash_colors.sh > .bash_colors
+```
+
+2. Load into your script
+```
+$ source .bash_colors
+```
+
+
+Variables
+---------
+
+**$CLR_***  
+  
+Variables for each supported color code. E.g. $CLR_WHITE, $CLR_BLACK  
+Call **clr_dump** for full list.
+
+**$CLR_ESC**  
+is a special variable for escape code (\033) followed by [ character.
+
+
+Functions
+---------
+
+**clr_dump**  
+Output table of available colors, functions and variables.
+
+**clr_*** _string_  
+Functions for each supported color. E.g. clr_white, clr_black  
+See **clr_dump** for list.
+
+**clr_escape** _string_ _$CLR_ ...  
+escape _string_ with given colors. Latest colors overwrites previous.
+
+**clr_reset**  
+Reset formatting. Useful for custom usage of $CLR_* variable series.
+
+
 See also
-========
+--------
 
 console_codes(4)  
 [Advanced Bash Scripting Guide](http://tldp.org/LDP/abs/html/colorizing.html)
