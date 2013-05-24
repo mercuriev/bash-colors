@@ -12,27 +12,27 @@ Examples
 --------
 
 Print "foobar" with red foreground.  
-```
+```sh
 $ clr_red "foobar"
 ```
 
 Print "foobar" with green background.  
-```
+```sh
 $ clr_greenb "foobar"
 ```
 
 Print "foobar" with cyan foreground and bold font.  
-```
+```sh
 $ clr_bold "$(clr_cyan foobar)"
 ```
 
 or manually, using variables  
-```
+```sh
 $ clr_escape foobar $CLR_BOLD $CLR_CYAN
 ```
 
 or any other code  
-```
+```sh
 clr_escape foobar 1 36
 ```
 
@@ -41,12 +41,12 @@ Quick start
 ------------
 
 1. Download source  
-```
+```sh
 $ curl https://raw.github.com/garygolden/bash_colors/master/bash_colors.sh > .bash_colors
 ```
 
 2. Load into your script
-```
+```sh
 $ source .bash_colors
 ```
 
