@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Constants and functions for terminal colors.
-# Author: Max Mercruriev <max@garygolden.me>
+# Author: Max Mercruriev <max@mercuriev.dev>
 
 CLR_ESC="\033["
 
