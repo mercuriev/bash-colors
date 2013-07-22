@@ -42,7 +42,7 @@ Quick start
 
 1. Download source  
 ```sh
-$ curl https://raw.github.com/garygolden/bash_colors/master/bash_colors.sh > .bash_colors
+$ curl https://raw.github.com/maxtsepkov/bash_colors/master/bash_colors.sh > .bash_colors
 ```
 
 2. Load into your script
