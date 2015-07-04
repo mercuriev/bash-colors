@@ -56,7 +56,7 @@ function clr_reset           { clr_escape "$1" $CLR_RESET;           }
 function clr_reset_underline { clr_escape "$1" $CLR_RESET_UNDERLINE; }
 function clr_reset_reverse   { clr_escape "$1" $CLR_RESET_REVERSE;   }
 function clr_default         { clr_escape "$1" $CLR_DEFAULT;         }
-function clr_defaultb        { clr_esacpe "$1" $CLR_DEFAULTB;        }
+function clr_defaultb        { clr_escape "$1" $CLR_DEFAULTB;        }
 function clr_bold            { clr_escape "$1" $CLR_BOLD;            }
 function clr_bright          { clr_escape "$1" $CLR_BRIGHT;          }
 function clr_underscore      { clr_escape "$1" $CLR_UNDERSCORE;      }
