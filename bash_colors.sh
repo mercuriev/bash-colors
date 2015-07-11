@@ -5,7 +5,7 @@
 
 CLR_ESC="\033["
 
-# All these varibles has a function with the same name, but in lower case.
+# All these variables has a function with the same name, but in lower case.
 #
 CLR_RESET=0             # reset all attributes to their defaults
 CLR_RESET_UNDERLINE=24  # underline off
@@ -36,8 +36,8 @@ CLR_MAGENTAB=45         # set magenta background
 CLR_CYANB=46            # set cyan background
 CLR_WHITEB=47           # set white background
 
-# General function to wrap string with escape seqence(s).
-# Ex: console_escape foobar $CLR_RED $CLR_BOLD
+# General function to wrap string with escape sequence(s).
+# Ex: clr_escape foobar $CLR_RED $CLR_BOLD
 function clr_escape
 {
     local result="$1"
