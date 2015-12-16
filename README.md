@@ -33,7 +33,7 @@ $ clr_escape "foobar" $CLR_BOLD $CLR_CYAN
 
 or any other code  
 ```sh
-clr_escape "foobar" 1 36
+$ clr_escape "foobar" 1 36
 ```
 
 
