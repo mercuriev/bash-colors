@@ -36,6 +36,55 @@ CLR_MAGENTAB=45         # set magenta background
 CLR_CYANB=46            # set cyan background
 CLR_WHITEB=47           # set white background
 
+
+# check if string exists as function
+# usage: if fn_exists "sometext"; then ... fi
+function fn_exists
+{
+    type -t "$1" | grep -q 'function'
+}
+
+# iterate through command arguments, o allow for iterative color application
+function clr_layer
+{
+    # default echo setting
+    CLR_ECHOSWITCHES="-e"
+    CLR_STACK=""
+    CLR_SWITCHES=""
+    ARGS=("$@")
+
+    # iterate over arguments in reverse
+    for ((i=$#; i>=0; i--)); do
+        ARG=${ARGS[$i]}
+        # echo $ARG
+        # set CLR_VAR as last argtype
+        firstletter=${ARG:0:1}
+
+        # check if argument is a switch
+        if [ "$firstletter" = "-" ] ; then
+            # if -n is passed, set switch for echo in clr_escape
+            if [[ $ARG == *"n"* ]]; then
+                CLR_ECHOSWITCHES="-en"
+                CLR_SWITCHES=$ARG
+            fi
+        else
+            # last arg is the incoming string
+            if [ -z "$CLR_STACK" ]; then
+                CLR_STACK=$ARG
+            else
+                # if the argument is function, apply it
+                if [ -n "$ARG" ] && fn_exists $ARG; then
+                    #continue to pass switches through recursion
+                    CLR_STACK=$($ARG "$CLR_STACK" $CLR_SWITCHES)
+                fi
+            fi
+        fi
+    done
+
+    # pass stack and color var to escape function
+    clr_escape "$CLR_STACK" $1;
+}
+
 # General function to wrap string with escape sequence(s).
 # Ex: clr_escape foobar $CLR_RED $CLR_BOLD
 function clr_escape
@@ -49,34 +98,34 @@ function clr_escape
 	shift || break
     done
 
-    echo -e "$result"
+    echo "$CLR_ECHOSWITCHES" "$result"
 }
 
-function clr_reset           { clr_escape "$1" $CLR_RESET;           }
-function clr_reset_underline { clr_escape "$1" $CLR_RESET_UNDERLINE; }
-function clr_reset_reverse   { clr_escape "$1" $CLR_RESET_REVERSE;   }
-function clr_default         { clr_escape "$1" $CLR_DEFAULT;         }
-function clr_defaultb        { clr_escape "$1" $CLR_DEFAULTB;        }
-function clr_bold            { clr_escape "$1" $CLR_BOLD;            }
-function clr_bright          { clr_escape "$1" $CLR_BRIGHT;          }
-function clr_underscore      { clr_escape "$1" $CLR_UNDERSCORE;      }
-function clr_reverse         { clr_escape "$1" $CLR_REVERSE;         }
-function clr_black           { clr_escape "$1" $CLR_BLANK;           }
-function clr_red             { clr_escape "$1" $CLR_RED;             }
-function clr_green           { clr_escape "$1" $CLR_GREEN;           }
-function clr_brown           { clr_escape "$1" $CLR_BROWN;           }
-function clr_blue            { clr_escape "$1" $CLR_BLUE;            }
-function clr_magenta         { clr_escape "$1" $CLR_MAGENTA;         }
-function clr_cyan            { clr_escape "$1" $CLR_CYAN;            }
-function clr_white           { clr_escape "$1" $CLR_WHITE;           }
-function clr_blackb          { clr_escape "$1" $CLR_BLACKB;          }
-function clr_redb            { clr_escape "$1" $CLR_REDB;            }
-function clr_greenb          { clr_escape "$1" $CLR_GREENB;          }
-function clr_brownb          { clr_escape "$1" $CLR_BROWNB;          }
-function clr_blueb           { clr_escape "$1" $CLR_BLUEB;           }
-function clr_magentab        { clr_escape "$1" $CLR_MAGENTAB;        }
-function clr_cyanb           { clr_escape "$1" $CLR_CYANB;           }
-function clr_whiteb          { clr_escape "$1" $CLR_WHITEB;          }
+function clr_reset           { clr_layer $CLR_RESET "$@";           }
+function clr_reset_underline { clr_layer $CLR_RESET_UNDERLINE "$@"; }
+function clr_reset_reverse   { clr_layer $CLR_RESET_REVERSE "$@";   }
+function clr_default         { clr_layer $CLR_DEFAULT "$@";         }
+function clr_defaultb        { clr_layer $CLR_DEFAULTB "$@";        }
+function clr_bold            { clr_layer $CLR_BOLD "$@";            }
+function clr_bright          { clr_layer $CLR_BRIGHT "$@";          }
+function clr_underscore      { clr_layer $CLR_UNDERSCORE "$@";      }
+function clr_reverse         { clr_layer $CLR_REVERSE "$@";         }
+function clr_black           { clr_layer $CLR_BLACK "$@";           }
+function clr_red             { clr_layer $CLR_RED "$@";             }
+function clr_green           { clr_layer $CLR_GREEN "$@";           }
+function clr_brown           { clr_layer $CLR_BROWN "$@";           }
+function clr_blue            { clr_layer $CLR_BLUE "$@";            }
+function clr_magenta         { clr_layer $CLR_MAGENTA "$@";         }
+function clr_cyan            { clr_layer $CLR_CYAN "$@";            }
+function clr_white           { clr_layer $CLR_WHITE "$@";           }
+function clr_blackb          { clr_layer $CLR_BLACKB "$@";          }
+function clr_redb            { clr_layer $CLR_REDB "$@";            }
+function clr_greenb          { clr_layer $CLR_GREENB "$@";          }
+function clr_brownb          { clr_layer $CLR_BROWNB "$@";          }
+function clr_blueb           { clr_layer $CLR_BLUEB "$@";           }
+function clr_magentab        { clr_layer $CLR_MAGENTAB "$@";        }
+function clr_cyanb           { clr_layer $CLR_CYANB "$@";           }
+function clr_whiteb          { clr_layer $CLR_WHITEB "$@";          }
 
 # Outputs colors table
 function clr_dump
