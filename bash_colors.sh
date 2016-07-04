@@ -61,12 +61,10 @@ function clr_layer
         firstletter=${ARG:0:1}
 
         # check if argument is a switch
-        if [ "$firstletter" = "-" ] ; then
             # if -n is passed, set switch for echo in clr_escape
-            if [[ $ARG == *"n"* ]]; then
-                CLR_ECHOSWITCHES="-en"
-                CLR_SWITCHES=$ARG
-            fi
+        if [[ ("$firstletter" = "-") && ($ARG == *"n"*) ]]; then
+            CLR_ECHOSWITCHES="-en"
+            CLR_SWITCHES=$ARG
         else
             # last arg is the incoming string
             if [ -z "$CLR_STACK" ]; then
