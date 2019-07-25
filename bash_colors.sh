@@ -54,7 +54,7 @@ function clr_layer
     ARGS=("$@")
 
     # iterate over arguments in reverse
-    for ((i=$#; i>=0; i--)); do
+    for ((i=$#-1; i>=0; i--)); do
         ARG=${ARGS[$i]}
         # echo $ARG
         # set CLR_VAR as last argtype
