@@ -2,7 +2,12 @@
 #
 # Constants and functions for terminal colors.
 # Author: Max Mercruriev <max@mercuriev.dev>
-
+if [[ "$BASH_SOURCE" == "$0" ]]; then
+    is_script=true
+    set -eu -o pipefail
+else
+    is_script=false
+fi
 CLR_ESC="\033["
 
 # All these variables has a function with the same name, but in lower case.
@@ -54,7 +59,7 @@ function clr_layer
     ARGS=("$@")
 
     # iterate over arguments in reverse
-    for ((i=$#; i>=0; i--)); do
+    for ((i=$#-1; i>=0; i--)); do
         ARG=${ARGS[$i]}
         # echo $ARG
         # set CLR_VAR as last argtype
@@ -175,3 +180,6 @@ function clr_dump
 '
 }
 
+if [[ "$is_script" == "true" ]]; then
+    clr_dump
+fi
