@@ -2,7 +2,7 @@
 #
 # Constants and functions for terminal colors.
 # Author: Max Tsepkov <max@yogi.pw>
-if [[ "$BASH_SOURCE" == "$0" ]]; then
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
     is_script=true
     set -eu -o pipefail
 else
@@ -78,16 +78,16 @@ function clr_layer
                 CLR_STACK=$ARG
             else
                 # if the argument is function, apply it
-                if [ -n "$ARG" ] && fn_exists $ARG; then
+                if [ -n "$ARG" ] && fn_exists "$ARG"; then
                     #continue to pass switches through recursion
-                    CLR_STACK=$($ARG "$CLR_STACK" $CLR_SWITCHES)
+                    CLR_STACK=$($ARG "$CLR_STACK" "$CLR_SWITCHES")
                 fi
             fi
         fi
     done
 
     # pass stack and color var to escape function
-    clr_escape "$CLR_STACK" $1;
+    clr_escape "$CLR_STACK" "$1";
 }
 
 # General function to wrap string with escape sequence(s).
@@ -96,7 +96,7 @@ function clr_escape
 {
     local result="$1"
     until [ -z "${2:-}" ]; do
-	if ! [ $2 -ge 0 -a $2 -le 47 ] 2>/dev/null; then
+	if ! [ "$2" -ge 0 ] || ! [ "$2" -le 47 ] 2>/dev/null; then
 	    echo "clr_escape: argument \"$2\" is out of range" >&2 && return 1
 	fi
         result="${CLR_ESC}${2}m${result}${CLR_ESC}${CLR_RESET}m"
@@ -154,7 +154,7 @@ function clr_dump
     echo
     clr_bold "    Code     Function           Variable"
     echo \
-'    0        clr_reset          $CLR_RESET
+"    0        clr_reset          $CLR_RESET
     1        clr_bold           $CLR_BOLD
     2        clr_bright         $CLR_BRIGHT
     4        clr_underscore     $CLR_UNDERSCORE
@@ -177,7 +177,7 @@ function clr_dump
     45       clr_magentab       $CLR_MAGENTAB
     46       clr_cyanb          $CLR_CYANB
     47       clr_whiteb         $CLR_WHITEB
-'
+"
 }
 
 if [[ "$is_script" == "true" ]]; then
