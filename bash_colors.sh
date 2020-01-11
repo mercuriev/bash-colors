@@ -1,7 +1,6 @@
 #!/bin/bash
 #
 # Constants and functions for terminal colors.
-# Author: Max Mercruriev <max@mercuriev.dev>
 if [[ "$BASH_SOURCE" == "$0" ]]; then
     is_script=true
     set -eu -o pipefail
