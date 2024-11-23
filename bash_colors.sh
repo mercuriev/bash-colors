@@ -48,7 +48,7 @@ function fn_exists
     type -t "$1" | grep -q 'function'
 }
 
-# iterate through command arguments, o allow for iterative color application
+# iterate through command arguments, to allow for iterative color application
 function clr_layer
 {
     # default echo setting
